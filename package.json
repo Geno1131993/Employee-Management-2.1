@@ -3,7 +3,7 @@
   "version": "2.1.0",
   "description": "CLI Employee Management database.",
   "main": "index.js",
-  "scripts": {
+    "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Danielle Smith",
