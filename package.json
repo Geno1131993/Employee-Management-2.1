@@ -1,0 +1,16 @@
+{
+  "name": "employee-management-2.1",
+  "version": "2.1.0",
+  "description": "CLI Employee Management database.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Danielle Smith",
+  "license": "ISC",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^7.0.0",
+    "mysql": "^2.17.1"
+  }
+}
