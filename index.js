@@ -1,4 +1,4 @@
-const {prompt} = require("inquirer");
+const inquirer = require("inquirer");
 var table = require("console.table");
 const db = require("./db");
 
@@ -17,7 +17,7 @@ function start(){
 
 
 async function prompt_user(){
-    const {choice} = await prompt([
+    await inquirer.prompt([
         {
             type: "list",
             name: "choice",
@@ -82,34 +82,54 @@ async function prompt_user(){
             ]
         }
 
-    ]);
+    ]).then(choice => {
 
-
-
-    console.log(`This is what you selected: ${choice}`);
-    switch(choice){
-        case "VIEW_EMPLOYEES":
-            return view_employees();
-        default:
-            return exit_cli();
-    }
-
+        console.log(`This is the choice you made: ${choice.choice}`);
+        var choice = choice.choice;
+        switch (choice){
+            case "VIEW_EMPLOYEES":
+                return view_employees();
+            case "VIEW_BY_DEPARTMENT":
+                return view_by_department();
+        }
+        
+    });
 }
 
 
+async function view_employees(){
+    const employees = await db.find_all();
+    console.table(employees);
+    prompt_user();
+}
+
+
+
 async function view_by_department(){
-    // 
+    const departments = await db.find_all_departments();
+
+
+    const department_options = departments.map(({id, name}) =>({
+        name: name,
+        value: id
+    }));
 
 
     const {department_id} = await prompt([
         {
-             type: "list",
+            type: "list",
             name: "department_id",
             message: "Which department roster are you trying to view?",
             choices: department_options
         }
     ]);
 
+
+    const employees = await db.employees_by_department();
+
+    console.table(employees);
+
+    prompt_user();
 }
 
 
