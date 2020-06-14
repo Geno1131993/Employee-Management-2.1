@@ -1,12 +1,18 @@
 const {prompt} = require("inquirer");
-const db = require("./db");
 var table = require("console.table");
+const db = require("./db");
+
+
 
 start();
 
+
+
 function start(){
     console.log("Welcome to the Employee Manager!");
+    prompt_user();
 }
+
 
 
 
@@ -73,11 +79,44 @@ async function prompt_user(){
                     name: "Quit",
                     value: "QUIT"
                 }
-
             ]
+        }
 
+    ]);
+
+
+
+    console.log(`This is what you selected: ${choice}`);
+    switch(choice){
+        case "VIEW_EMPLOYEES":
+            return view_employees();
+        default:
+            return exit_cli();
+    }
+
+}
+
+
+async function view_by_department(){
+    // 
+
+
+    const {department_id} = await prompt([
+        {
+             type: "list",
+            name: "department_id",
+            message: "Which department roster are you trying to view?",
+            choices: department_options
         }
     ]);
 
+}
+
+
+
+
+function exit_cli(){
+    console.log("Exiting program.");
+    process.exit();
 }
 
