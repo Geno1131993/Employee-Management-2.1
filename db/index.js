@@ -37,6 +37,23 @@ class DB{
         );
     }
 
+
+
+    add_employee(){
+        return this.connection.query(
+            "INSERT INTO employee SET ?",
+            employee
+        );
+    }
+
+
+
+    find_roles(){
+        return this.connection.query(
+            "SELECT role.id, role.title, department.name AS department, role.salary FROM role LEFT JOIN department on role.department_id = department.id;"
+        );
+    }
+
 }
 
 

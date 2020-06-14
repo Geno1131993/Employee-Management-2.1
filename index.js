@@ -91,10 +91,27 @@ async function prompt_user(){
                 return view_employees();
             case "VIEW_BY_DEPARTMENT":
                 return view_by_department();
+            case "ADD":
+                return add_employee();
+
         }
         
     });
 }
+
+
+
+async function add_employee(){
+    const roles = await db.find_roles();
+    const employees = await db.find_all();
+
+
+    const employee = await inquirer.prompt([
+        
+
+    ]);
+}
+
 
 
 async function view_employees(){
